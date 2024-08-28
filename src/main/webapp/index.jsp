@@ -1,9 +1,9 @@
 <html>
 
 <body>
-<h2 style="background-color:DodgerBlue;">WelCome To AWS Devops</h2>
-       <p>This is Demo Class</p>
-    <p>This is a JSP page</p>
+<h2 style="text-align: center;">WelCome To AWS Devops</h2>
+       <p style="text-align: center;">This is Demo Class</p>
+    <p style="text-align: center;">This is a JSP page</p>
     <a href="./helloservlet">Hit the /hello Servlet</a>
 </body>
 
