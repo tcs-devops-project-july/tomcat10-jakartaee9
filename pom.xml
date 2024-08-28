@@ -10,6 +10,9 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    		<sonar.host.url>http://13.233.225.197:9000/</sonar.host.url>
+     <sonar.login>admin</sonar.login>
+		<sonar.password>Devareddy@0461</sonar.password>
     <java.version>17</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
   </properties>
