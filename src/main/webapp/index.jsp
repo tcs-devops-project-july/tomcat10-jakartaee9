@@ -5,7 +5,7 @@
        <p style="text-align: center;">This is Demo Class</p>
        <p style="text-align: center;">Demo Classes are started on September 3rd</p>
     <p style="text-align: center;">This is a JSP page</p>
-    <a href="./helloservlet">Hit the /hello Servlet</a>
+    <a style="text-align: center;" href="./helloservlet">Hit the /hello Servlet</a>
 </body>
 
 </html>
