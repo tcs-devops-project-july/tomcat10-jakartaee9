@@ -10,7 +10,7 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    		<sonar.host.url>http://13.233.225.197:9000/</sonar.host.url>
+    		<sonar.host.url>http://3.108.193.103:9000/</sonar.host.url>
      <sonar.login>admin</sonar.login>
 		<sonar.password>Devareddy@0461</sonar.password>
     <java.version>17</java.version>
@@ -38,13 +38,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Hello Release Repository</name>
-	      <url>http://13.201.185.205:8082/devtech/repository/hello-release/</url>
+	      <url>http://13.234.30.52:8082/devtech/repository/hello-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Hello Snapshot Repository </name>
-	      <url>http://13.201.185.205:8082/devtech/repository/hello-snapshot/</url>
+	      <url>http://13.234.30.52:8082/devtech/repository/hello-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
