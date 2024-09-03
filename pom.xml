@@ -11,9 +11,12 @@
 
   <properties>
     		<sonar.host.url>http://3.108.193.103:9000/</sonar.host.url>
+	       <sonar.login>squ_e65b46517075ac0d3bbb04a8ec92c45dfd2bf5a1</sonar.login>
+<!--
      <sonar.login>admin</sonar.login>
-		<sonar.password>Devareddy@0461</sonar.password>
-    <java.version>17</java.version>
+<sonar.password>Devareddy@0461</sonar.password>
+-->
+	  <java.version>17</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
   </properties>
 
