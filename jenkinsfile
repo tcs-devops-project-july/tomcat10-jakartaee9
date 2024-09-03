@@ -1,0 +1,39 @@
+node {
+    
+    def mavenHome = tool name:"maven3.9.9"
+    stage('CheckOutCode')
+    {
+    git branch: 'development', credentialsId: 'f8955162-a147-480b-81cd-dcadf2366132', url: 'https://github.com/tcs-devops-project-july/tomcat10-jakartaee9.git'
+    }
+    
+    stage('Build')
+    {
+        sh "${mavenHome}/bin/mvn clean package"
+    }
+    
+    stage('SonarQubeReport')
+    {
+        sh "${mavenHome}/bin/mvn clean sonar:sonar"
+    }
+    
+    stage('UploadArtifactIntoNexus')
+    {
+       sh "${mavenHome}/bin/mvn clean deploy"
+    }
+    
+    stage('DeployApplicationIntoTomcat')
+    {
+        sshagent(['6b0018a8-541b-4191-8e27-5233d1b63054']) {
+    sh "scp -o StrictHostKeyChecking=no target/helloworld.war ec2-user@65.0.29.230:/opt/apache-tomcat-11.0.0-M24/webapps"
+}
+    }
+    
+    stage('SendEmailNotification')
+    {
+        emailext body: '''Build over..!!
+
+Regards
+Devendra Reddy
+6301462775''', subject: 'Build Over..!!', to: 'Puppaladevendrareddy77@gmail.com '
+    }
+}
