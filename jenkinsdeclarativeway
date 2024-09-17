@@ -1,0 +1,103 @@
+pipeline{
+    
+    agent any
+    
+    /*
+    agennt{
+        lable "nodename"
+    }
+    */
+    
+    tools{
+      maven "maven3.9.9"    
+    }
+    
+    options{
+        timestamps()
+        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))
+    }
+    
+    triggers{
+        
+    //pollSCM    
+      //pollSCM('* * * * *')
+      //Build Periodically 
+      //cron('* * * * *')
+      //Github Hook
+      githubPush()
+     }
+     
+    stages{
+        
+        stage('CheckOutCode'){
+            steps{
+     git branch: 'development', credentialsId: 'f8955162-a147-480b-81cd-dcadf2366132', url: 'https://github.com/tcs-devops-project-july/tomcat10-jakartaee9.git'
+            }
+        }
+        stage('Build'){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+        
+         stage('ExecuteSonarQubeReport'){
+            steps{
+                sh "mvn clean sonar:sonar"
+            }
+        }
+        
+        stage('UploadArifactInToNexus'){
+            steps{
+                sh "mvn clean deploy"
+            }
+        }
+        
+        
+            stage('DeployAppInToTomcat'){
+            steps{
+                
+                sshagent(['6b0018a8-541b-4191-8e27-5233d1b63054']) {
+        sh "scp -o StrictHostKeyChecking=no target/helloworld.war ec2-user@65.0.29.230:/opt/apache-tomcat-11.0.0-M24/webapps"
+
+
+                }
+                }
+            }
+
+        
+         
+        
+        
+        
+    }//stages closings 
+    
+    post{
+        
+        always{
+             emailext body: '''Build over..!!
+
+               Regards
+               Devendra Reddy
+               6301462775''', subject: 'Build Over..!!',
+               to: 'Puppaladevendrareddy77@gmail.com '
+        }
+        
+        failure{
+             emailext body: '''Build over..failure!!
+
+      Regards
+      Devendra Reddy
+      6301462775''', subject: 'Build Over..!!', 
+      to: 'Puppaladevendrareddy77@gmail.com '
+        }
+        
+        success{
+             emailext body: '''Build over..success!!
+
+      Regards
+      Devendra Reddy
+      6301462775''', subject: 'Build Over..!!', to: 'Puppaladevendrareddy77@gmail.com '
+        }
+    }
+    
+}//pipeline closing
