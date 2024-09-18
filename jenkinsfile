@@ -18,12 +18,14 @@ node('walmart-node1'){
     {
         sh "${mavenHome}/bin/mvn clean sonar:sonar"
     }
-    
+
+/*
     stage('UploadArtifactIntoNexus')
     {
        sh "${mavenHome}/bin/mvn clean deploy"
     }
-    
+*/
+
     stage('DeployApplicationIntoTomcat')
     {
         sshagent(['6b0018a8-541b-4191-8e27-5233d1b63054']) {
